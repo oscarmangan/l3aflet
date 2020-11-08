@@ -1,0 +1,15 @@
+main {
+    padding: 2%;
+    padding-top: 70px;
+}
+
+#map {
+    width: 96vw;
+    height: 70vh;
+}
+
+.fa-caret-square-down {
+    color: white;
+    font-size: 40px;
+    float: right;
+}

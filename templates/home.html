@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{%  if user.is_authenticated %}
+    <h5>Welcome <b>{{ user.username }}</b>!</h5>
+    <p>
+        You have successfully logged in, this is the homepage. To view the OpenStreetMap widget
+        please click 'Map' in the menu. You can also find your location by clicking on the map!
+        <br><br>
+        If you want to learn more about this application, please click 'About'
+        <br><br>
+        If you are finished using this application, click 'Logout'
+    </p><br>
+
+{% else %}
+    <h5>This app is only accessible for registered users</h5>
+    <p>If you have an account, please go to the login button in the menu bar.<br>
+    If you do not have an account, please click signup to register!</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load leaflet_tags %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% block title %}Map{% endblock %}
+
+{% block content %}
+{%  if user.is_authenticated %}
+    <div id="mapDiv">
+        {% leaflet_map "map" callback="window.map_init_basic"%}
+        <script src={% static 'js/map.js' %}></script>
+    </div>
+    <b>{{ user.profile.user }}'s</b> location<br>
+    <div class="toast-body">
+    </div>
+{% else %}
+    <h5>This app is only accessible for registered users</h5>
+    <p>If you have an account, please go to the login button in the menu bar.<br>
+    If you do not have an account, please click signup to register!</p>
+{% endif %}
+
+{% endblock %}

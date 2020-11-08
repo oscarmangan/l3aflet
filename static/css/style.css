@@ -1,0 +1,13 @@
+body {
+    padding: 2%;
+}
+
+h1 {
+    color: red;
+    text-shadow: 1px 1px black;
+}
+
+#map {
+    width: 100vw;
+    height: 60vh;
+}
