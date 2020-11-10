@@ -2,16 +2,6 @@ var HOST = location.protocol + "//" + location.host;
 var locationMarker;
 var circle;
 
-var myIcon = L.icon({
-    iconUrl: '../static/leaflet/images/marker-icon.png',
-    iconSize: [26, 48],
-    iconAnchor: [12, 43],
-    popupAnchor: [-3, -50],
-    shadowUrl: '../static/leaflet/images/marker-shadow.png',
-    shadowSize: [48, 75],
-    shadowAnchor: [10, 72]
-});
-
 function map_init_basic(map, options) {
     map.setView([53.35, -6.3], 10);
     var pos;
@@ -43,7 +33,7 @@ function setMapToCurrentLocation(map, pos) {
     if (locationMarker) {
         map.removeLayer(locationMarker);
     }
-    locationMarker = L.marker(myLatLon,{icon: myIcon}).addTo(map);
+    locationMarker = L.marker(myLatLon).addTo(map);
     if (circle) {
         map.removeLayer(circle);
     }

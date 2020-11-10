@@ -124,6 +124,7 @@ LEAFLET_CONFIG = {
     'RESET_VIEW': False,
     'SCALE': None,
     'OPACITY': 0.5,
+    'FORCE_IMAGE_PATH': True,
 }
 
 # login/logout redirects
