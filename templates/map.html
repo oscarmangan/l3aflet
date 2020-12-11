@@ -8,17 +8,68 @@
 
 {% block content %}
 {%  if user.is_authenticated %}
-    <div id="mapDiv">
-        {% leaflet_map "map" callback="window.map_init_basic"%}
-        <script src={% static 'js/map.js' %}></script>
-    </div>
-    <b>{{ user.profile.user }}'s</b> location<br>
-    <div class="toast-body">
+    <div class="flightDiv">
+        <h3>Flight Finder</h3>
+        <div class="searchAirport">
+            <input id="searchIata" class="searchBox" type="text" placeholder="Enter an IATA code here, e.g. DUB"/><br>
+            <div class="buttonsDiv">
+                <button id="buttonIata" class="searchBtn">Search <i class="fa fa-search"></i></button>
+                <button id="closestAirport" class="searchBtn">Nearest <i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <div id="mapDiv">
+            {% leaflet_map "map" callback="window.map_init_basic"%}
+        </div>
+        <div class="airportInfo">
+            <div class="infoDiv">
+                <h3 class="display-4" id="airportName">Airport</h3><br>
+                <p>IATA: </p><h4 class="display-4" id="airportCode">ABC</h4>
+                <p>Country: </p><h4 class="display-4" id="airportCountry">XY</h4>
+            </div>
+        </div>
+        <div class="flightInfo">
+            <h2 class="display-5"><i class="fas fa-plane-departure"></i> Departures</h2>
+            <div class="departures">
+                <table id="departuresTable" class="table table-sm table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Flight</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Departure Time</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="depData"></tbody>
+                </table>
+                <div id="noDepartures" class="noDataDiv">
+                    <h4>No departures were found for this airport</h4>
+                </div>
+                <small>Note times listed are local to that airport</small>
+            </div>
+            <h2 class="display-5"><i class="fas fa-plane-arrival"></i> Arrivals</h2>
+            <div class="arrivals">
+                <table id="arrivalsTable" class="table table-sm table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Flight</th>
+                            <th scope="col">Origin</th>
+                            <th scope="col">Arrival Time</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="arrData"></tbody>
+                </table>
+                <div id="noArrivals" class="noDataDiv">
+                    <h4>No arrivals were found for this airport</h4>
+                </div>
+                <small>Note times listed are local to that airport</small>
+            </div>
+        </div>
+        <script src={% static 'js/flights.js' %}></script>
     </div>
 {% else %}
     <h5>This app is only accessible for registered users</h5>
     <p>If you have an account, please go to the login button in the menu bar.<br>
     If you do not have an account, please click signup to register!</p>
 {% endif %}
-
 {% endblock %}

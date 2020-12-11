@@ -3,9 +3,21 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
+    <div class="accountForm">
+        <h3>Sign Up</h3>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <h6>{{ field.label_tag }}</h6>
+                {{ field }}
+                {% if field.help_text %}
+                    <small>{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            <button type="submit" class="accountBtn" id="signupBtn">Sign Up</button>
+        </form>
+    </div>
 {% endblock %}

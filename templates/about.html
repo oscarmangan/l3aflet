@@ -7,9 +7,18 @@
     <h4>About l3aflet</h4>
     <p>L3aflet is a location based services application designed and built by myself,
         <b>Oscar Mangan</b>. Using the Django web framework as our middleware with a Bootstrap
-        presentation flavour. The main useful feature <u>so far</u> is the OpenStreetMap widget
-        that you will find in the 'Map' page.
-        <br><br>
+        presentation flavour. The app is intended to display flight information from all around
+        the globe.
+    </p>
+    <p>
+        Using the Lufthansa API, you can query any airport in the world using it's
+        3 letter IATA code (e.g. Dublin -> DUB, Toronto -> YYZ). The application will automatically
+        take your current location, and bring you to the nearest airport, displaying
+        its incoming and outgoing flight information for today. If an airport is searched,
+        the incoming departures and arrivals for the current date will be displayed. You can
+        view the flight number, location of origin/departure, time and flight status.
+    </p>
+    <p>
         I hope you enjoy this application, I had fun learning about Django, Docker, AWS, PGAdmin and PostGIS
         to bring it to life and deploy it! GIS is a fun topic and I hope to expand and deepen the content
         on this application!

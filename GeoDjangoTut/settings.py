@@ -26,11 +26,16 @@ with open('secret_key.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'world.views.jwt_response_handler'
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,13 +46,16 @@ INSTALLED_APPS = [
     'world.apps.WorldConfig',
     'crispy_forms',
     'leaflet',
+    'pwa',
+    # 'rest_framework',
 ]
 
 MIDDLEWARE = [
+    # 'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -91,9 +99,9 @@ DATABASES = {
 if socket.gethostname() == "oscarmangan":
     DATABASES["default"]["HOST"] = "localhost"
     DATABASES["default"]["PORT"] = "25432"
-else:
-    DATABASES["default"]["HOST"] = "mynet"
-    DATABASES["default"]["PORT"] = "5432"
+# else:
+#     DATABASES["default"]["HOST"] = "mynet"
+#     DATABASES["default"]["PORT"] = "5432"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -128,8 +136,8 @@ LEAFLET_CONFIG = {
 }
 
 # login/logout redirects
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -144,6 +152,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# REST_FRAMEWORK = {
+#     # Use Django's standard 'django.contrib.auth' permissions or allow
+#     # read-only access for unauthenticated users
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     )
+# }
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -151,7 +172,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Set to False for local development, True for production
-DEPLOY_SECURE = True
+DEPLOY_SECURE = False
 
 # Set DEPLOY_SECURE to True only for LIVE deployment
 if DEPLOY_SECURE:
@@ -169,3 +190,21 @@ else:
 
 # Shell into containers on docker network
 # docker exec -it container_name /bin/bash
+
+# Progressive Web App configurations
+PWA_APP_NAME = 'l3aflet'
+PWA_APP_DESCRIPTION = 'l3aflet AWM application'
+PWA_APP_THEME_COLOR = '#4169e1'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_START_URL = '/'
+PWA_ROOT_URL = '/'
+PWA_APP_ICONS = [{
+    'src': '/static/images/globe_icon.ico',
+    'sizes': '160x160'
+}]
+PWA_APP_LANG = 'en-UK'
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
+

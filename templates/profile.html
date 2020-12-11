@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+{%  if user.is_authenticated %}
+    <div class="userProfile">
+        <h5>Username:</h5>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ user.username }}</p>
+            </div>
+        </div>
+
+        <h5>Email:</h5>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+        <h5>Location:</h5>
+        <div class="row">
+            <div class="col-sm">
+                <p>Locale</p>
+            </div>
+            <div class="col-sm">
+                <p id="profileLocale"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>City</p>
+            </div>
+            <div class="col-sm">
+                <p id="profileCity"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>Country</p>
+            </div>
+            <div class="col-sm">
+                <p id="profileCountry"></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'password_change' %}">Change password</a>
+
+    <script src={% static 'js/geocode.js' %}></script>
+
+{% else %}
+    <h5>This app is only accessible for registered users</h5>
+    <p>If you have an account, please go to the login button in the menu bar.<br>
+    If you do not have an account, please click signup to register!</p>
+{% endif %}
+{% endblock %}

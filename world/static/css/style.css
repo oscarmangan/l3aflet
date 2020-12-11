@@ -4,12 +4,191 @@ main {
 }
 
 #map {
-    width: 96vw;
+    margin: 0 auto;
+    width: 90vw;
     height: 70vh;
+    border: 1px solid royalblue;
 }
 
 .fa-caret-square-down {
     color: white;
     font-size: 40px;
     float: right;
+}
+
+.accountForm {
+    display: block;
+    margin: 1vh auto;
+    text-align: center;
+    max-width: 50%;
+}
+
+.accountForm h6 {
+    margin-top: 1.5vh;
+}
+
+.accountForm small {
+    color: gray;
+    list-style-position: inside;
+}
+
+.errorForm li {
+    margin: 1.5vh auto;
+    text-align: center;
+    list-style-position: inside;
+}
+
+.accountForm a {
+    text-align: center;
+    color: royalblue;
+    margin-top: 3vh;
+}
+
+.accountForm input {
+    font-size: 18px;
+    border: 1px solid gainsboro;
+    border-radius: 2px;
+    display: block;
+    min-width: 260px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2vh;
+}
+
+.accountForm p {
+    color: red;
+}
+
+.accountBtn {
+    color: royalblue;
+    border: 2px solid royalblue;
+    border-radius: 3px;
+    min-width: 260px;
+    background-color: white;
+    transition-duration: 0.4s;
+}
+
+.accountBtn:hover {
+    background-color: royalblue;
+    color: white;
+}
+
+#signupBtn {
+    margin-top: 1.5vh;
+}
+
+.flightDiv {
+    margin: 0 auto;
+    width: 94vw;
+    background-color: aliceblue;
+    border: 2px solid royalblue;
+    border-radius: 10px;
+}
+
+.flightDiv h3 {
+    padding-top: 2vh;
+    margin-left: 2vw;
+}
+
+.searchAirport {
+    margin-left: 2vw;
+    margin-bottom: 2vh;
+}
+
+.searchAirport button {
+    border: 2px solid royalblue;
+    color: royalblue;
+    background-color: white;
+    border-radius: 2px;
+    display: block;
+    width: 8vw;
+    min-width: 145px;
+    max-width: 145px;
+    margin-right: 10px;
+    transition-duration: 0.4s;
+}
+
+.searchAirport button:hover {
+    color: white;
+    background-color: royalblue;
+}
+
+.searchBox {
+    width: 40vw;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.userProfile {
+    margin-left: 0;
+}
+
+.row {
+    background-color: aliceblue;
+    border: 1px solid royalblue;
+    border-radius: 2px;
+    margin: 1vh auto;
+}
+
+.col-sm {
+    margin-left: 2vw;
+    max-width: 200px;
+}
+
+.col-sm p {
+    font-size: 18px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.buttonsDiv {
+    margin: 2vh 0;
+    display: flex;
+}
+
+.airportInfo {
+    display: flex;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 2vw;
+}
+
+.airportInfo h3 {
+    margin-left: 0;
+    margin-right: 3vw;
+    display: inline;
+    font-size: 42px;
+}
+
+.airportInfo p {
+    display: inline;
+}
+
+.airportInfo h4 {
+    margin-right: 3vw;
+    display: inline;
+    font-size: 36px;
+}
+
+.flightInfo {
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.departures {
+    margin: 1vh auto;
+    text-align: center;
+}
+
+.arrivals {
+    margin: 1vh auto;
+    text-align: center;
+}
+
+.noDataDiv {
+    display: none;
+    text-align: center;
+    padding: 2vh;
+    margin-bottom: 1vh;
 }

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
+{% load static %}
 
 {% block content %}
 {%  if user.is_authenticated %}
@@ -13,6 +14,11 @@
         <br><br>
         If you are finished using this application, click 'Logout'
     </p><br>
+    <div class="searchRestaurants">
+        <h5>Convert Co-ordinates</h5>
+        <input type="text" id="foodType" placeholder=""/>
+        <button onclick="getLocation()">Search</button>
+    </div>
 
 {% else %}
     <h5>This app is only accessible for registered users</h5>
