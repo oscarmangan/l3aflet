@@ -37,14 +37,35 @@ def update_location(request):
             opencage_key = f.read().strip()
         url = "https://api.opencagedata.com/geocode/v1/json?q=" + coords + "&key=" + opencage_key
         open_response = requests.get(url)
-        data = open_response.json()
+        data = open_response.json()["results"][0]["components"]
 
         # Set the user's profile data to the point and data retrieved from the OpenCage API
-        user_profile.road = data["results"][0]["components"]["road"]
-        user_profile.locale = data["results"][0]["components"]["locality"]
-        user_profile.city = data["results"][0]["components"]["city"]
-        user_profile.county = data["results"][0]["components"]["county"]
-        user_profile.country = data["results"][0]["components"]["country"]
+        # Not all keys can be returned by the API, so if not, just return an empty string
+        try:
+            user_profile.road = data['road']
+        except:
+            user_profile.road = ""
+
+        try:
+            user_profile.locale = data['locality']
+        except:
+            user_profile.locale = ""
+
+        try:
+            user_profile.city = data['city']
+        except:
+            user_profile.city = ""
+
+        try:
+            user_profile.county = data['county']
+        except:
+            user_profile.county = ""
+
+        try:
+            user_profile.country = data['country']
+        except:
+            user_profile.country = ""
+
         user_profile.last_location = point
 
         user_profile.save()

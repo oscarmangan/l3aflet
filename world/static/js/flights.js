@@ -59,6 +59,7 @@ function updateLocation(map) {
     navigator.geolocation.getCurrentPosition(
         function(pos) {
             updateUserCoords(pos);
+            console.log(pos);
             getAirport(map, token, null);
         },
         function(err){
