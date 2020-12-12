@@ -99,9 +99,9 @@ DATABASES = {
 if socket.gethostname() == "oscarmangan":
     DATABASES["default"]["HOST"] = "localhost"
     DATABASES["default"]["PORT"] = "25432"
-else:
-    DATABASES["default"]["HOST"] = "wmap-postgis"
-    DATABASES["default"]["PORT"] = "5432"
+# else:
+#     DATABASES["default"]["HOST"] = "wmap-postgis"
+#     DATABASES["default"]["PORT"] = "5432"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -172,7 +172,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Set to False for local development, True for production
-DEPLOY_SECURE = True
+DEPLOY_SECURE = False
 
 # Set DEPLOY_SECURE to True only for LIVE deployment
 if DEPLOY_SECURE:

@@ -3,23 +3,27 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    <div class="accountForm">
-        <h3>Sign Up</h3>
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-                <h6>{{ field.label_tag }}</h6>
-                {{ field }}
-                {% if field.help_text %}
-                    <div class="helpDiv">
-                        <small>{{ field.help_text }}</small>
-                    </div>
-                {% endif %}
-                {% for error in field.errors %}
-                    <p>{{ error }}</p>
+    {%  if user.is_authenticated %}
+
+    {% else %}
+        <div class="accountForm">
+            <h3>Sign Up</h3>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <h6>{{ field.label_tag }}</h6>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <div class="helpDiv">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-            <button type="submit" class="accountBtn" id="signupBtn">Sign Up</button>
-        </form>
-    </div>
+                <button type="submit" class="accountBtn" id="signupBtn">Sign Up</button>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}

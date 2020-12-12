@@ -78,6 +78,7 @@ def updateUserAirport(request):
 
 # Method to handle a signup request using the edited form at signup.html
 def signup(request):
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
