@@ -3,9 +3,6 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    {%  if user.is_authenticated %}
-
-    {% else %}
         <div class="accountForm">
             <h3>Sign Up</h3>
             <form method="post">
@@ -25,5 +22,4 @@
                 <button type="submit" class="accountBtn" id="signupBtn">Sign Up</button>
             </form>
         </div>
-    {% endif %}
 {% endblock %}
