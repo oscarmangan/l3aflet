@@ -45,6 +45,7 @@ urlpatterns = [
     path('', include('pwa.urls')),
     path('offline/', TemplateView.as_view(template_name='offline.html'), name='offline'),
 
+    # REST API urls
 
     # path('getaddress/', views.get_address, name='getaddress'),
     # path('api/', include(router.urls)),

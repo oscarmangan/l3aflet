@@ -54,6 +54,7 @@ def update_location(request):
         return JsonResponse({"message": str(e)}, status=400)
 
 
+# Method to update the users closest airport on their profile
 def updateUserAirport(request):
     try:
         user_profile = models.Profile.objects.get(user=request.user)
@@ -75,6 +76,7 @@ def updateUserAirport(request):
         return JsonResponse({"message": str(e)}, status=400)
 
 
+# Method to handle a signup request using the edited form at signup.html
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -90,6 +92,7 @@ def signup(request):
     return render(request, "../templates/registration/signup.html", {"form": form})
 
 
+# Method to handle a password change (login required to do so, like other methods)
 @login_required
 def passwordChange(request):
     if request.method == 'POST':
@@ -129,6 +132,9 @@ def getLufthansaToken(request):
         return JsonResponse({"message": str(e)}, status=400)
 
 
+# Method to get the nearest airport using the Lufthansa API, passing the coordinates of the users
+# current coordinates, the API then returns a JSON response of a list of nearest airports, we pass
+# back only the nearest one to the user
 @login_required
 def getNearbyAirport(request):
     try:
@@ -167,6 +173,7 @@ def getNearbyAirport(request):
         return JsonResponse({"message": str(e)}, status=400)
 
 
+# Method to search airports, again using Lufthansa API,
 @login_required
 def searchAirport(request):
     try:
@@ -212,6 +219,7 @@ def searchAirport(request):
         return JsonResponse({"message": str(e)}, status=400)
 
 
+# Method to get departures for nearest or searched airport using the API
 @login_required
 def retrieveDepartures(request):
     try:
@@ -241,6 +249,7 @@ def retrieveDepartures(request):
         return JsonResponse({"message": str(e)}, status=400)
 
 
+# Method to retrieve all arrivals for the current date at the desired airport, either nearest or searched
 @login_required()
 def retrieveArrivals(request):
     try:
@@ -253,6 +262,7 @@ def retrieveArrivals(request):
             'Authorization': 'Bearer ' + token
         }
 
+        # API requires date in a YYYY-MM-DDTHH:MM format
         now = datetime.now()
         dt = now.strftime("%Y-%m-%dT%H:%M")
 
@@ -272,6 +282,8 @@ def retrieveArrivals(request):
     except Exception as e:
         return JsonResponse({"message": str(e)}, status=400)
 
+
+# REST API / React implementation attempt
 
 # class CreateUser(APIView):
 #

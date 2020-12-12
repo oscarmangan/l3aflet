@@ -20,6 +20,7 @@ let depData = document.getElementById('depData');
 
 //If no token exists in session storage, get one from the Lufthansa API
 //If the token does exist, set the variable 'token' to it, and proceed
+//Session storage persists as long as the tab or browser is open
 function init_page(map, options) {
     if(!sessionStorage.getItem('token')){
         getToken(map);

@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class WorldBorder(models.Model):
     # Regular Django fields corresponding to the attributes in the
     # world borders shapefile
@@ -26,6 +27,7 @@ class WorldBorder(models.Model):
         return self.name
 
 
+# Profile model, holding the users creation timestamps, nearest airport, recent location and address details
 class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, editable=False)
