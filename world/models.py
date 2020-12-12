@@ -30,15 +30,30 @@ class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
+    road = models.CharField('Road', max_length=50, default='Road')
+    locale = models.CharField('Locale', max_length=50, default='Locale')
+    city = models.CharField('City', max_length=50, default='City')
+    county = models.CharField('County', max_length=50, default='County')
+    country = models.CharField('Country', max_length=50, default='Country')
     last_location = models.PointField(
         editable=False,
         blank=True,
         null=True,
         default=None,
     )
+    nearest_airport_location = models.PointField(
+        editable=False,
+        blank=True,
+        null=True,
+        default=None,
+    )
+    nearest_airport_name = models.CharField('Nearest Airport Info', max_length=50, null=True)
+    nearest_airport_code = models.CharField('Nearest Airport IATA', max_length=3, null=True)
+    nearest_airport_country = models.CharField('Nearest Airport Country', max_length=20, null=True)
 
     def __str__(self):
         return f"{self.user}"
+
 
 @receiver(post_save, sender=get_user_model())
 def manage_user_profile(sender, instance, created, **kwargs):

@@ -26,14 +26,51 @@ def update_location(request):
         if not user_profile:
             raise ValueError("Can't get User details")
 
+        # Adding the coordinates to the users profile
         point = request.POST["point"].split(",")
+        coords = request.POST["point"].replace(" ", "")
         point = [float(part) for part in point]
         point = Point(point, srid=4326)
 
+        # Reverse geocoding the coordinates to retrieve their address
+        with open('opencagekey.txt') as f:
+            opencage_key = f.read().strip()
+        url = "https://api.opencagedata.com/geocode/v1/json?q=" + coords + "&key=" + opencage_key
+        open_response = requests.get(url)
+        data = open_response.json()
+
+        # Set the user's profile data to the point and data retrieved from the OpenCage API
+        user_profile.road = data["results"][0]["components"]["road"]
+        user_profile.locale = data["results"][0]["components"]["locality"]
+        user_profile.city = data["results"][0]["components"]["city"]
+        user_profile.county = data["results"][0]["components"]["county"]
+        user_profile.country = data["results"][0]["components"]["country"]
         user_profile.last_location = point
+
         user_profile.save()
 
         return JsonResponse({"message": f"Set location to {point.wkt}."}, status=200)
+    except Exception as e:
+        return JsonResponse({"message": str(e)}, status=400)
+
+
+def updateUserAirport(request):
+    try:
+        user_profile = models.Profile.objects.get(user=request.user)
+        if not user_profile:
+            raise ValueError("Cannot find user")
+
+        airPoint = request.POST["coords"].split(",")
+        airPoint = [float(part) for part in airPoint]
+        airPoint = Point(airPoint, srid=4326)
+
+        user_profile.nearest_airport_location = airPoint
+        user_profile.nearest_airport_name = request.POST["airportName"]
+        user_profile.nearest_airport_code = request.POST["airportCode"]
+        user_profile.nearest_airport_country = request.POST["airportCountry"]
+        user_profile.save()
+
+        return JsonResponse({"message": f"Update users nearby airport info {airPoint.wkt}"}, status=200)
     except Exception as e:
         return JsonResponse({"message": str(e)}, status=400)
 
@@ -47,7 +84,7 @@ def signup(request):
             password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect("home")
+            return redirect("map")
     else:
             form = SignUpForm()
     return render(request, "../templates/registration/signup.html", {"form": form})
@@ -79,6 +116,7 @@ def getLufthansaToken(request):
             client_secret = f.read().strip()
 
         url = 'https://api.lufthansa.com/v1/oauth/token'
+
         data = {
             'client_id': client_key,
             'client_secret': client_secret,
@@ -86,7 +124,6 @@ def getLufthansaToken(request):
         }
         response = requests.post(url, data=data)
 
-        print(response.json())
         return JsonResponse(response.json(), status=response.status_code)
     except Exception as e:
         return JsonResponse({"message": str(e)}, status=400)
@@ -152,12 +189,10 @@ def searchAirport(request):
 
         # for loop to get the English version of the name of the airport
         for names in airport_data['Names']['Name']:
-            print(names)
             if names['@LanguageCode'] == 'EN':
                 airport_name = names['$']
                 break
             else:
-                print('No english names found')
                 airport_name = airport_data['Names']['Name'][0]['$']
 
         # if the response is a 404, no airport was found with the users query

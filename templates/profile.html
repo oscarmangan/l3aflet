@@ -19,36 +19,25 @@
                 <p>{{ user.email }}</p>
             </div>
         </div>
-        <h5>Location:</h5>
-        <div class="row">
-            <div class="col-sm">
-                <p>Locale</p>
-            </div>
-            <div class="col-sm">
-                <p id="profileLocale"></p>
-            </div>
+        <h5>Most Recent Location:</h5>
+        <div class="addressInfo">
+            <p>Road: </p><h3 class="display-4" id="profileRoad">{{ user.profile.road }}</h3><br>
+            <p>Locale: </p><h3 class="display-4" id="profileLocale">{{ user.profile.locale }}</h3><br>
+            <p>City: </p><h4 class="display-4" id="profileCity">{{ user.profile.city }}</h4>
+            <p>County: </p><h4 class="display-4" id="profileCounty">{{ user.profile.county }}</h4><br>
+            <p>Country: </p><h4 class="display-4" id="profileCountry">{{ user.profile.country }}</h4><br>
+            <p>Coordinates: {{ user.profile.last_location }}</p>
         </div>
-        <div class="row">
-            <div class="col-sm">
-                <p>City</p>
-            </div>
-            <div class="col-sm">
-                <p id="profileCity"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <p>Country</p>
-            </div>
-            <div class="col-sm">
-                <p id="profileCountry"></p>
-            </div>
+        <h5>Nearest Airport:</h5>
+        <div class="addressInfo">
+            <p>Name: </p><h3 class="display-4">{{ user.profile.nearest_airport_name }}</h3><br>
+            <p>IATA: </p><h4 class="display-4">{{ user.profile.nearest_airport_code }}</h4>
+            <p>Country Code: </p><h4 class="display-4">{{ user.profile.nearest_airport_country }}</h4><br>
+            <p>Coordinates: {{ user.profile.nearest_airport_location }}</p>
         </div>
     </div>
 
     <a href="{% url 'password_change' %}">Change password</a>
-
-    <script src={% static 'js/geocode.js' %}></script>
 
 {% else %}
     <h5>This app is only accessible for registered users</h5>

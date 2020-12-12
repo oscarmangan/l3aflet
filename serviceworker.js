@@ -3,16 +3,20 @@
 /*  Creation Date: 23/11/2020               */
 
 //import Google Workbox library
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+//importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-var staticCacheName = "django-pwa-v" + new Date().getTime();
-var filesToCache = [
-    '/offline',
+let staticCacheName = "django-pwa-v" + new Date().getTime();
+let filesToCache = [
+    '/offline/',
+    '/about/',
+    '/accounts/login',
+    '/signup/',
 ];
 
 // Cache on install
 self.addEventListener("install", event => {
     this.skipWaiting();
+    console.log('hello');
     event.waitUntil(
         caches.open(staticCacheName)
             .then(cache => {
@@ -43,7 +47,7 @@ self.addEventListener("fetch", event => {
                 return response || fetch(event.request);
             })
             .catch(() => {
-                return caches.match('offline');
+                return caches.match('/offline/');
             })
     )
 });

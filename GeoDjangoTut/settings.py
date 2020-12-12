@@ -99,9 +99,9 @@ DATABASES = {
 if socket.gethostname() == "oscarmangan":
     DATABASES["default"]["HOST"] = "localhost"
     DATABASES["default"]["PORT"] = "25432"
-# else:
-#     DATABASES["default"]["HOST"] = "mynet"
-#     DATABASES["default"]["PORT"] = "5432"
+else:
+    DATABASES["default"]["HOST"] = "mynet"
+    DATABASES["default"]["PORT"] = "5432"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -172,7 +172,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Set to False for local development, True for production
-DEPLOY_SECURE = False
+DEPLOY_SECURE = True
 
 # Set DEPLOY_SECURE to True only for LIVE deployment
 if DEPLOY_SECURE:
@@ -202,7 +202,11 @@ PWA_APP_ORIENTATION = 'portrait'
 PWA_START_URL = '/'
 PWA_ROOT_URL = '/'
 PWA_APP_ICONS = [{
-    'src': '/static/images/globe_icon.ico',
+    'src': '/static/images/globe_icon.png',
+    'sizes': '160x160'
+}]
+PWA_APP_ICONS_APPLE = [ {
+    'src': '/static/images/globe_icon.png',
     'sizes': '160x160'
 }]
 PWA_APP_LANG = 'en-UK'

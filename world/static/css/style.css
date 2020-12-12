@@ -192,3 +192,40 @@ main {
     padding: 2vh;
     margin-bottom: 1vh;
 }
+
+.addressInfo {
+    background-color: aliceblue;
+    border: 1px solid royalblue;
+    border-radius: 2px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding: 2vw;
+}
+
+.addressInfo h3 {
+    margin-left: 0;
+    margin-right: 3vw;
+    display: inline;
+    font-size: 42px;
+}
+
+.addressInfo h4 {
+    margin-left: 0;
+    margin-right: 3vw;
+    display: inline;
+    font-size: 34px;
+}
+
+.addressInfo p {
+    display: inline;
+}
+
+.helpDiv ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0;
+}
+
+.helpDiv li {
+    margin-bottom: 0.5vh;
+}

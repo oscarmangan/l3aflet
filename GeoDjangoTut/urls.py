@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib.gis import admin
-from django.contrib.auth.models import User
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 from world import views
@@ -33,9 +32,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signup, name='signup'),
     path('password_change/', views.passwordChange, name='password_change'),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
-    path('map/', TemplateView.as_view(template_name='map.html'), name='map'),
+    path('', TemplateView.as_view(template_name='map.html'), name='map'),
     path('luft-auth/', views.getLufthansaToken, name='get_token'),
     path('nearby-airport/', views.getNearbyAirport, name='nearby_airport'),
     path('search-airport/', views.searchAirport, name='search_airport'),
@@ -43,6 +41,7 @@ urlpatterns = [
     path('get-arrivals/', views.retrieveArrivals, name='get_arrivals'),
     path('profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
     path('updatedb/', views.update_location, name='updatedb'),
+    path('update-db-airport/', views.updateUserAirport, name='updateUserAirport'),
     path('', include('pwa.urls')),
     path('offline/', TemplateView.as_view(template_name='offline.html'), name='offline'),
 
