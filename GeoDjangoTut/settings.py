@@ -100,7 +100,7 @@ if socket.gethostname() == "oscarmangan":
     DATABASES["default"]["HOST"] = "localhost"
     DATABASES["default"]["PORT"] = "25432"
 else:
-    DATABASES["default"]["HOST"] = "mynet"
+    DATABASES["default"]["HOST"] = "wmap-postgis"
     DATABASES["default"]["PORT"] = "5432"
 
 # Password validation
